@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Xamarin.Forms"
+    xmlns:converters="using:Xamarin.Forms.Platform.WinRT.Converters"
+    xmlns:renderers="using:Xamarin.Forms.Platform.WinRT.Renderers">
+
+    <converters:ViewToRendererConverter x:Key="ViewToRendererConverter"/>
+    <converters:HeightConverter x:Key="HeightConverter"/>
+    <converters:PageToRendererConverter x:Key="PageToRendererConverter"/>
+
+    <DataTemplate x:Key="ViewCell">
+        <ContentPresenter Height="{Binding RenderHeight, Converter={StaticResource HeightConverter}}" Content="{Binding View, Converter={StaticResource ViewToRendererConverter}}"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TabbedPage">
+        <renderers:TabbedPagePresenter Content="{Binding Converter={StaticResource PageToRendererConverter}}"/>
+    </DataTemplate>
+    <DataTemplate x:Key="TabbedPageHeader">
+        <TextBlock Text="{Binding Title}"/>
+    </DataTemplate>
+
+</ResourceDictionary>
