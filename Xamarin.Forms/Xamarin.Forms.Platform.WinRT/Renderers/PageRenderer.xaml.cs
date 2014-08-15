@@ -30,6 +30,9 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
         public PageRenderer()
         {
             this.InitializeComponent();
+
+            this.Loaded+=(s,e) => base.Element.SendAppearing();
+            this.Unloaded+=(s,e) => base.Element.SendDisappearing();
         }
 
         protected override void SetChildren(UIElement element)
