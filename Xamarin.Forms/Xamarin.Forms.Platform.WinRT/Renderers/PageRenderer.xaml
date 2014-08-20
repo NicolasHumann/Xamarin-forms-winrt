@@ -8,9 +8,10 @@
     
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winRt="using:Xamarin.Forms.Platform.WinRT"
     mc:Ignorable="d">
 
- 
+
 
     <!--
         This grid acts as a root panel for the page that defines two rows:
@@ -34,7 +35,7 @@
                 <ColumnDefinition Width="120"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Margin="39,59,39,0" 
+            <Button x:Name="backButton" Margin="39,59,39,0" Visibility="{Binding Current.CanExecute, Source={StaticResource NavigationService}, Converter={StaticResource BoolToVisibilityConverter}}" Command="{Binding Current, Source={StaticResource NavigationService}}" 
                         Style="{StaticResource NavigationBackButtonNormalStyle}"
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
@@ -43,8 +44,8 @@
             <TextBlock x:Name="pageTitle" Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
-        
+
         <ContentPresenter Grid.Row="1" x:Name="TheContentPresenter"></ContentPresenter>
-        
+
     </Grid>
 </local:PageRendererControl>

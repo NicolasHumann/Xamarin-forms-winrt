@@ -106,10 +106,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ItemsHub.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Renderers\PageRenderer.xaml.cs">
       <DependentUpon>PageRenderer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderers\SliderRenderer.cs" />
+    <Compile Include="Renderers\SwitchRenderer.cs" />
     <Compile Include="Renderers\TabbedPageRenderer.xaml.cs">
       <DependentUpon>TabbedPageRenderer.xaml</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -140,7 +142,6 @@
     <Compile Include="RendererFactory.cs" />
     <Compile Include="Renderers\ButtonRenderer.cs" />
     <Compile Include="Renderers\NavigationPageRenderer.cs" />
-    <Compile Include="Renderers\PageRenderer.cs" />
     <Compile Include="ThreadTimer.cs" />
     <Compile Include="Renderers\ViewRenderer.cs" />
     <Compile Include="Renderers\VisualElementRenderer.cs" />

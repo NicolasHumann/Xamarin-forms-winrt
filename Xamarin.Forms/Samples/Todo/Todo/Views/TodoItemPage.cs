@@ -12,7 +12,8 @@ namespace Todo
 	{
 		public TodoItemPage ()
 		{
-			this.SetBinding (ContentPage.TitleProperty, "Name");
+			//this.SetBinding (ContentPage.TitleProperty, "Name");
+		    this.Title = "Add Todo item";
 
 			NavigationPage.SetHasNavigationBar (this, true);
 			var nameLabel = new Label { Text = "Name" };

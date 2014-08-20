@@ -3,11 +3,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Xamarin.Forms"
     xmlns:converters="using:Xamarin.Forms.Platform.WinRT.Converters"
-    xmlns:renderers="using:Xamarin.Forms.Platform.WinRT.Renderers">
-
+    xmlns:renderers="using:Xamarin.Forms.Platform.WinRT.Renderers"
+    xmlns:winRt="using:Xamarin.Forms.Platform.WinRT">
+   
+        <winRt:NavigationService x:Name="NavigationService"/>
+ 
     <converters:ViewToRendererConverter x:Key="ViewToRendererConverter"/>
     <converters:HeightConverter x:Key="HeightConverter"/>
     <converters:PageToRendererConverter x:Key="PageToRendererConverter"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
 
     <DataTemplate x:Key="ViewCell">
         <ContentPresenter Height="{Binding RenderHeight, Converter={StaticResource HeightConverter}}" Content="{Binding View, Converter={StaticResource ViewToRendererConverter}}"/>

@@ -15,6 +15,8 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
         public NavigationPageRenderer()
         {
             AutoPackage = false;
+            this.Loaded += (s, e) => base.Element.SendAppearing();
+            this.Unloaded += (s, e) => base.Element.SendDisappearing();
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<NavigationPage> e)
@@ -22,8 +24,8 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
             base.OnElementChanged(e);
 
             Element.Pushed += Element_Pushed;
-            //Element.Popped += this.PageOnPopped;
-            //Element.PoppedToRoot += this.PageOnPoppedToRoot;
+            Element.Popped += Element_Popped;
+            Element.PoppedToRoot += Element_PoppedToRoot;
 
             Page[] array = base.Element.StackCopy.Reverse().ToArray();
             if (array.Any())
@@ -36,8 +38,22 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
             }
         }
 
+        void Element_PoppedToRoot(object sender, NavigationEventArgs e)
+        {
+            
+        }
+
+        void Element_Popped(object sender, NavigationEventArgs e)
+        {
+            NavigationService.Current.Pop(Element);
+        }
+
         void Element_Pushed(object sender, NavigationEventArgs e)
         {
+            if (e.Page == base.Element.StackCopy.LastOrDefault())
+            {
+                e.Page.IgnoresContainerArea = true;
+            }
             NavigationService.Current.Push(e.Page, Element);
         }
     }

@@ -24,7 +24,7 @@ namespace Xamarin.Forms.Platform.WinRT
             NavigationService.Current.OnNewPage += Current_OnNewPage;
             _tracker = new ToolbarTracker();
             _tracker.CollectionChanged += (s, e) => UpdateAppBar();
-          
+
         }
 
         private void UpdateAppBar()
@@ -40,14 +40,14 @@ namespace Xamarin.Forms.Platform.WinRT
                 var button = new AppBarButton
                              {
                                  Label = toolbarItem.Name,
-                                 Icon = new BitmapIcon {UriSource = new System.Uri(toolbarItem.Icon.File)}
+                                 Icon = new BitmapIcon { UriSource = new Uri(toolbarItem.Icon.File) }
                              };
                 ToolbarItem item = toolbarItem;
                 button.Click += (s, e) => item.Activate();
                 commandBar.PrimaryCommands.Add(button);
             }
 
-     
+
 
             _page.BottomAppBar = commandBar;
         }
@@ -55,9 +55,7 @@ namespace Xamarin.Forms.Platform.WinRT
 
         void Current_OnNewPage(object sender, PageEventArgs e)
         {
-            SetCurrentPage(e.Page);
-           
-            
+            SetCurrentPage(e.Page, e.UsePreviousPage);
         }
 
         public static implicit operator UIElement(Platform canvas)
@@ -67,7 +65,7 @@ namespace Xamarin.Forms.Platform.WinRT
 
         private void renderer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            NavigationService.Current.NavigationModel.Roots.ForEach(f => f.Layout(new Rectangle(0.0, 0.0, this._renderer.ActualWidth, this._renderer.ActualHeight)));
+            NavigationService.Current.NavigationModel.Roots.ForEach(f => f.Layout(new Rectangle(0.0, 0.0, _renderer.ActualWidth, _renderer.ActualHeight)));
         }
 
         public void SetPage(Page page)
@@ -75,10 +73,10 @@ namespace Xamarin.Forms.Platform.WinRT
             NavigationService.Current.NavigationModel.Push(page, null);
             SetCurrentPage(page);
             page.NavigationProxy.Inner = NavigationService.Current;
-           
+
         }
 
-        private void SetCurrentPage(Page page)
+        private void SetCurrentPage(Page page, bool usePreviousPage = false)
         {
             page.Platform = this;
 
@@ -88,8 +86,14 @@ namespace Xamarin.Forms.Platform.WinRT
                 page.SetRenderer(Renderer);
             }
 
-            _renderer.Children.Add((UIElement)Renderer);
             page.Layout(new Rectangle(0, 0, _renderer.ActualWidth, _renderer.ActualHeight));
+            if (usePreviousPage)
+            {
+                Renderer = page.GetRenderer();
+                UpdateAppBar();
+            }
+            _renderer.Children.Clear();
+            _renderer.Children.Add((UIElement)Renderer);
 
             if (NavigationService.Current.NavigationModel.Roots.Last() != null)
             {
@@ -109,6 +113,11 @@ namespace Xamarin.Forms.Platform.WinRT
 
         public static readonly BindableProperty RendererProperty =
            BindableProperty.Create((Expression<Func<Platform, IWinRTRenderer>>)(w => w.Renderer), null);
+
+        public Platform(Windows.UI.Xaml.Controls.Frame applicationFrame)
+        {
+
+        }
 
         private IWinRTRenderer Renderer
         {
