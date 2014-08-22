@@ -111,6 +111,7 @@
       <DependentUpon>PageRenderer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Renderers\SliderRenderer.cs" />
+    <Compile Include="Renderers\StackPanelRenderer.cs" />
     <Compile Include="Renderers\SwitchRenderer.cs" />
     <Compile Include="Renderers\TabbedPageRenderer.xaml.cs">
       <DependentUpon>TabbedPageRenderer.xaml</DependentUpon>

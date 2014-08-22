@@ -81,7 +81,7 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
         {
             if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
             {
-                UpdateBackgroundColor();
+              // TODO
             }
         }
 
@@ -107,24 +107,11 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
             element.GotFocus += (s, e) => Element.IsFocused = true;
             element.LostFocus += (s, e) => Element.IsFocused = false;
 
-            UpdateBackgroundColor();
+          
         }
 
 
-        protected virtual void UpdateBackgroundColor()
-        {
-            Control control = (object)Control as Control;
-            if (_initialBrush == null)
-            {
-                _initialBrush = (control == null ? base.Background : control.Background);
-            }
-            if (control == null)
-            {
-                Background = ((Element.BackgroundColor != Color.Default ? Element.BackgroundColor.ToBrush() : _initialBrush));
-                return;
-            }
-            control.Background = ((Element.BackgroundColor != Color.Default ? Element.BackgroundColor.ToBrush() : _initialBrush));
-        }
+      
 
         protected virtual void UpdateNativeControl()
         {
@@ -143,8 +130,7 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
             {
                 _child.Width = Width;
                 _child.Height = Height;
-            }
-
+            } 
             Canvas.SetLeft(this, Element.X + Element.TranslationX);
             Canvas.SetTop(this, Element.Y + Element.TranslationY);
             Opacity = Element.Opacity;

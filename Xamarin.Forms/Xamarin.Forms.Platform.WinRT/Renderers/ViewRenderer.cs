@@ -13,7 +13,7 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
         {
             base.OnElementChanged(e);
 
-            this.UpdateBackgroundColor();
+           
         }
     }
 
@@ -23,7 +23,7 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
         {
             base.OnElementChanged(e);
             base.SizeChanged += (s, ee) => UpdateClipToBounds();
-            this.UpdateBackgroundColor();
+         
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
