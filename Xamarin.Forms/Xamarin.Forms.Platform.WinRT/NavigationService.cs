@@ -25,7 +25,7 @@ namespace Xamarin.Forms.Platform.WinRT
         public Task PushAsync(Page page)
         {
             this.Push(page, NavigationModel.CurrentPage);
-            return Task.FromResult<Page>(page);
+            return Task.FromResult(page);
         }
 
         public Task<Page> PopAsync()

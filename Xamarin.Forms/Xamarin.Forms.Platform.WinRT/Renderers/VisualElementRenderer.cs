@@ -7,13 +7,12 @@ using Windows.UI.Xaml.Media;
 
 namespace Xamarin.Forms.Platform.WinRT.Renderers
 {
-    public class VisualElementRenderer<TElement, TNativeElement> : Canvas, IWinRTRenderer
+    public class VisualElementRenderer<TElement, TNativeElement> : Windows.UI.Xaml.Controls.Canvas, IWinRTRenderer
         where TElement : VisualElement
         where TNativeElement : FrameworkElement
     {
         private VisualElement _element;
         private VisualElement _oldElement;
-        private Brush _initialBrush;
         private TNativeElement _child;
 
         public TElement Element
@@ -110,9 +109,6 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
           
         }
 
-
-      
-
         protected virtual void UpdateNativeControl()
         {
             if (Element.Batched || Element.Bounds.IsEmpty)
@@ -130,7 +126,7 @@ namespace Xamarin.Forms.Platform.WinRT.Renderers
             {
                 _child.Width = Width;
                 _child.Height = Height;
-            } 
+            }
             Canvas.SetLeft(this, Element.X + Element.TranslationX);
             Canvas.SetTop(this, Element.Y + Element.TranslationY);
             Opacity = Element.Opacity;

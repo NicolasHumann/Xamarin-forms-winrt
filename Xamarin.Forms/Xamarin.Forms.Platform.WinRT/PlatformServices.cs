@@ -92,8 +92,6 @@ namespace Xamarin.Forms.Platform.WinRT
 
         public async Task<Stream> GetStreamAsync(Uri uri, CancellationToken cancellationToken)
         {
-
-
             // Web file
             var response = await _httpClient.GetAsync(uri, cancellationToken);
             return await response.Content.ReadAsStreamAsync();

@@ -5,7 +5,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinRT;
 using Xamarin.Forms.Platform.WinRT.Renderers;
 
-[assembly: ExportRenderer(typeof(StackLayout), typeof(StackPanelRenderer))]
+//[assembly: ExportRenderer(typeof(StackLayout), typeof(StackPanelRenderer))]
+// TODO: Use a specific renderer or let Xamarin Forms compute the position with the canvas ?
 namespace Xamarin.Forms.Platform.WinRT.Renderers
 {
     public class StackPanelRenderer : StackPanel, IWinRTRenderer

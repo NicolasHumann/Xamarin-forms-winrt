@@ -7,13 +7,12 @@ namespace Xamarin.Forms.Platform.WinRT
     {
         public ElementChangedEventArgs(TElement oldElement, TElement newElement)
         {
-            this.OldElement = oldElement;
-            this.NewElement = newElement;
+           OldElement = oldElement;
+           NewElement = newElement;
         }
 
-        public TElement NewElement { get; private set; }
-
-        public TElement OldElement { get; private set; }
+        public TElement NewElement { get; set; }
+        public TElement OldElement { get; set; }
     }
 }
 
